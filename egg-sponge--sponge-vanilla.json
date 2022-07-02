@@ -1,0 +1,59 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-07-02T22:46:25+08:00",
+    "name": "Sponge (SpongeVanilla)",
+    "author": "support@pterodactyl.io",
+    "description": "SpongeVanilla \u662f\u4e00\u4e2a\u53ef\u4ee5\u52a0\u8f7d Mod \u7684\u670d\u52a1\u7aef\u3002",
+    "features": [
+        "eula",
+        "java_version",
+        "pid_limit"
+    ],
+    "docker_images": {
+        "Java 8": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_8",
+        "Java 11": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_11",
+        "Java 16": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_16",
+        "Java 17": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_17"
+    },
+    "file_denylist": [],
+    "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \"\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Sponge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\ncurl -k -sSL \"https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/Sponge\/spongevanilla-${SPONGE_VERSION}.jar\" -o ${SERVER_JARFILE}",
+            "container": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Sponge \u7248\u672c",
+            "description": "SpongeVanilla \u8981\u4e0b\u8f7d\u5e76\u4f7f\u7528\u7684\u7248\u672c\u3002\r\n\u7248\u672c\u8bf7\u5728\u8fd9\u91cc\u67e5\u770b:https:\/\/io.ivampiresp.com\/Software\/MCServer\/Sponge",
+            "env_variable": "SPONGE_VERSION",
+            "default_value": "1.12.2-7.3.0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^([a-zA-Z0-9.\\-_]+)$\/",
+            "field_type": "text"
+        },
+        {
+            "name": "\u670d\u52a1\u5668 Jar \u6587\u4ef6",
+            "description": "\u4f60\u60f3\u81ea\u5b9a\u4e49\u7684\u6587\u4ef6\u540d\u79f0\u3002",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
+        }
+    ]
+}

@@ -1,0 +1,59 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2022-07-02T22:46:28+08:00",
+    "name": "\u539f\u7248 Minecraft",
+    "author": "support@pterodactyl.io",
+    "description": "\u6211\u7684\u4e16\u754c \u539f\u7248\u9884\u8bbe",
+    "features": [
+        "eula",
+        "java_version",
+        "pid_limit"
+    ],
+    "docker_images": {
+        "Java 8": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_8",
+        "Java 11": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_11",
+        "Java 16": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_16",
+        "Java 17": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_17"
+    },
+    "file_denylist": [],
+    "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -jar {{SERVER_JARFILE}}",
+    "config": {
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \")! For help, type \"\r\n}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/ash\r\n# Vanilla MC Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\n# wget\r\n\r\nLATEST_VERSION=`curl https:\/\/bmclapi2.bangbang93.com\/mc\/game\/version_manifest.json | jq -r '.latest.release'`\r\nLATEST_SNAPSHOT_VERSION=`curl https:\/\/bmclapi2.bangbang93.com\/mc\/game\/version_manifest.json | jq -r '.latest.snapshot'`\r\n\r\necho -e \"latest version is $LATEST_VERSION\"\r\necho -e \"latest snapshot is $LATEST_SNAPSHOT_VERSION\"\r\n\r\nif [ -z \"$VANILLA_VERSION\" ] || [ \"$VANILLA_VERSION\" == \"latest\" ]; then\r\n  MANIFEST_URL=$(curl -sSL https:\/\/bmclapi2.bangbang93.com\/mc\/game\/version_manifest.json | jq --arg VERSION $LATEST_VERSION -r '.versions | .[] | select(.id== $VERSION )|.url')\r\nelif [ \"$VANILLA_VERSION\" == \"snapshot\" ]; then\r\n  MANIFEST_URL=$(curl -sSL https:\/\/bmclapi2.bangbang93.com\/mc\/game\/version_manifest.json | jq --arg VERSION $LATEST_SNAPSHOT_VERSION -r '.versions | .[] | select(.id== $VERSION )|.url')\r\nelse\r\n  MANIFEST_URL=$(curl -sSL https:\/\/bmclapi2.bangbang93.com\/mc\/game\/version_manifest.json | jq --arg VERSION $VANILLA_VERSION -r '.versions | .[] | select(.id== $VERSION )|.url')\r\nfi\r\n\r\nDOWNLOAD_URL=$(curl ${MANIFEST_URL} | jq .downloads.server | jq -r '. | .url')\r\n# \u66ff\u6362\u4e0b\u8f7d\u5730\u5740\u4e3abmclapi2.bangbang93.com\r\nDOWNLOAD_URL=$(echo $DOWNLOAD_URL | sed 's\/launcher.mojang.com\/bmclapi2.bangbang93.com\/')\r\n\r\necho -e \"running: wget -O ${SERVER_JARFILE} $DOWNLOAD_URL\"\r\n# curl -o ${SERVER_JARFILE} $DOWNLOAD_URL\r\nwget -O ${SERVER_JARFILE} $DOWNLOAD_URL\r\n\r\necho -e \"Install Complete\"",
+            "container": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/installers:alpine",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "\u670d\u52a1\u5668 Jar \u6587\u4ef6",
+            "description": "\u5c06\u8981\u4f7f\u7528\u7684 Jar \u6587\u4ef6\uff0c\u60a8\u53ef\u4ee5\u81ea\u5b9a\u4e49\u3002",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
+        },
+        {
+            "name": "\u670d\u52a1\u5668\u7248\u672c",
+            "description": "\u8981\u5b89\u88c5\u7684 Minecraft \u7248\u672c\u3002\u4f7f\u7528\u201clatest\u201d\u5b89\u88c5\u6700\u65b0\u7248\u672c\uff0c\u6216\u4f7f\u7528\u201csnapshot\u201d\u5b89\u88c5\u6700\u65b0\u5feb\u7167\u3002\u8f6c\u5230\u201c\u8bbe\u7f6e\u201d>\u201c\u91cd\u65b0\u5b89\u88c5\u670d\u52a1\u5668\u201d\u4ee5\u5e94\u7528\u3002",
+            "env_variable": "VANILLA_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|between:3,15",
+            "field_type": "text"
+        }
+    ]
+}
