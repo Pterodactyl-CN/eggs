@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-03T17:36:32+08:00",
+    "exported_at": "2022-07-03T17:42:35+08:00",
     "name": "Mohist",
     "author": "im@ivampiresp.com",
     "description": "Mohist \u662f\u4e00\u4e2a\u652f\u6301\u9ad8\u7248\u672c\u7684 Minecraft \u670d\u52a1\u7aef\uff0c\u53ef\u4ee5\u7528\u63d2\u4ef6 \u548c Mod\u3002",
@@ -32,7 +32,7 @@
             "name": "Mohist \u7248\u672c",
             "description": "\u8981\u5b89\u88c5\u7684 Mohist \u7248\u672c\u3002\u53ef\u4ee5\u4ece https:\/\/io.ivampiresp.com\/Software\/MCServer\/Forge&Bukkit\/Mohist \u83b7\u53d6",
             "env_variable": "VERSION",
-            "default_value": "1.16.5-677",
+            "default_value": "1.16.5-1039",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|regex:\/^([a-zA-Z0-9.\\-_]+)$\/",
