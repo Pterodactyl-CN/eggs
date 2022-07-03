@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-07-03T16:58:34+08:00",
+    "exported_at": "2022-07-03T17:36:32+08:00",
     "name": "Mohist",
     "author": "im@ivampiresp.com",
     "description": "Mohist \u662f\u4e00\u4e2a\u652f\u6301\u9ad8\u7248\u672c\u7684 Minecraft \u670d\u52a1\u7aef\uff0c\u53ef\u4ee5\u7528\u63d2\u4ef6 \u548c Mod\u3002",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# CatServer Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nwget \"https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/Forge&Bukkit\/Mohist\/mohist-${VERSION}-server.jar\" -O ${SERVER_JARFILE}\r\n\r\necho -e \"\u670d\u52a1\u5668\u5b89\u88c5\u5b8c\u6210\u3002\"",
+            "script": "#!\/bin\/ash\r\n# Mohist Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nwget \"https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/Forge&Bukkit\/Mohist\/mohist-${VERSION}-server.jar\" -O ${SERVER_JARFILE}\r\n\r\necho -e \"\u670d\u52a1\u5668\u5b89\u88c5\u5b8c\u6210\u3002\"",
             "container": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/installers:alpine",
             "entrypoint": "ash"
         }
