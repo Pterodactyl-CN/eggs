@@ -26,7 +26,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n# CatServer Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\nwget \"https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/Forge&Bukkit\/CatServer\/CatServer-${VERSION}.jar\" -O ${SERVER_JARFILE}\r\n\r\necho -e \"\u670d\u52a1\u5668\u5b89\u88c5\u5b8c\u6210\u3002\"",
-            "container": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/installers:alpine",
+            "container": "ccr.ccs.tencentyun.com\/pterodactyl\/installers:alpine",
             "entrypoint": "ash"
         }
     },

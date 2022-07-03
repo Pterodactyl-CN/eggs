@@ -30,7 +30,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n# Bungeecord Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nwget -O ${SERVER_JARFILE} https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/Proxy\/BungeeCord-${BUNGEE_VERSION}.jar",
-            "container": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/installers:alpine",
+            "container": "ccr.ccs.tencentyun.com\/pterodactyl\/installers:alpine",
             "entrypoint": "ash"
         }
     },

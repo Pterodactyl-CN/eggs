@@ -25,7 +25,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n\r\n#apt update\r\n#apt install -y zip unzip wget curl\r\n\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n    mkdir \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"backing up config files\"\r\nrm *.bak versions.html.gz\r\ncp server.properties server.properties.bak\r\ncp permissions.json permissions.json.bak\r\ncp whitelist.json whitelist.json.bak\r\n\r\nwget -O bds.zip https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/BDS\/Linux\/bedrock-server-1.19.2.02.zip\r\necho -e \"Unpacking server files\"\r\nunzip -o bds.zip\r\n\r\necho -e \"Cleaning up after installing\"\r\nrm bds.zip\r\n\r\necho -e \"restoring backup config files - on first install there will be file not found errors which you can ignore.\"\r\ncp -rf server.properties.bak server.properties\r\ncp -rf permissions.json.bak permissions.json\r\ncp -rf whitelist.json.bak whitelist.json\r\n\r\nchmod +x bedrock_server\r\n\r\necho -e \"Install Completed\"\r\nexit",
-            "container": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/installers:alpine",
+            "container": "ccr.ccs.tencentyun.com\/pterodactyl\/installers:alpine",
             "entrypoint": "ash"
         }
     },

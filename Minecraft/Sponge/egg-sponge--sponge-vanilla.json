@@ -30,7 +30,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/ash\r\n# Sponge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\ncurl -k -sSL \"https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/Sponge\/spongevanilla-${SPONGE_VERSION}.jar\" -o ${SERVER_JARFILE}",
-            "container": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/installers:alpine",
+            "container": "ccr.ccs.tencentyun.com\/pterodactyl\/installers:alpine",
             "entrypoint": "ash"
         }
     },
