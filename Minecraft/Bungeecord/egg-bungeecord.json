@@ -7,17 +7,17 @@
     "exported_at": "2022-07-02T22:46:27+08:00",
     "name": "Bungeecord",
     "author": "support@pterodactyl.io",
-    "description": "Bungeecord \u662f Minecraft \u7fa4\u7ec4\u670d\u89e3\u51b3\u65b9\u6848",
+    "description": "Bungeecord 是 Minecraft 群组服解决方案",
     "features": [
         "eula",
         "java_version",
         "pid_limit"
     ],
     "docker_images": {
-        "Java 8": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_8",
-        "Java 11": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_11",
-        "Java 16": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_16",
-        "Java 17": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_17"
+        "Java 8": "ccr.ccs.tencentyun.com/pterodactyl-cdn/yolks:java_8",
+        "Java 11": "ccr.ccs.tencentyun.com/pterodactyl-cdn/yolks:java_11",
+        "Java 16": "ccr.ccs.tencentyun.com/pterodactyl-cdn/yolks:java_16",
+        "Java 17": "ccr.ccs.tencentyun.com/pterodactyl-cdn/yolks:java_17"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
@@ -29,15 +29,15 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Bungeecord Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nwget -O ${SERVER_JARFILE} https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/Proxy\/BungeeCord-${BUNGEE_VERSION}.jar",
-            "container": "ccr.ccs.tencentyun.com\/pterodactyl\/installers:alpine",
+            "script": "#!/bin/ash\r\n# Bungeecord Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\ncd /mnt/server\r\n\r\nwget -O ${SERVER_JARFILE} https://io.ivampiresp.com/d/Software/MCServer/Proxy/BungeeCord-${BUNGEE_VERSION}.jar",
+            "container": "ccr.ccs.tencentyun.com/pterodactyl/installers:alpine",
             "entrypoint": "ash"
         }
     },
     "variables": [
         {
-            "name": "Bungeecord \u7248\u672c",
-            "description": "\u8981\u5b89\u88c5\u7684\u7248\u672c",
+            "name": "Bungeecord 版本",
+            "description": "要安装的版本",
             "env_variable": "BUNGEE_VERSION",
             "default_value": "1653",
             "user_viewable": true,
@@ -46,13 +46,13 @@
             "field_type": "text"
         },
         {
-            "name": "Bungeecord Jar \u6587\u4ef6",
-            "description": "\u4f60\u53ef\u4ee5\u81ea\u5b9a\u4e49 Jar \u6587\u4ef6",
+            "name": "Bungeecord Jar 文件",
+            "description": "你可以自定义 Jar 文件",
             "env_variable": "SERVER_JARFILE",
             "default_value": "bungeecord.jar",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "rules": "required|regex:/^([\\w\\d._-]+)(\\.jar)$/",
             "field_type": "text"
         }
     ]
