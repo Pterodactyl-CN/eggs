@@ -8,4 +8,7 @@
 Minecraft 等服务端 Jar 文件从 [这里](https://io.ivampiresp.com/Software/MCServer) 下载。文件全部收集于互联网以及其他大佬的镜像站，可能更新不及时，您可以提交 issue 以让我们补充镜像。
 
 
+## LiteLoader BDS Wine
+翼龙中国首发 LiteLoader BDS under Wine 完美解决方案。
+
 ## 用的开心！
