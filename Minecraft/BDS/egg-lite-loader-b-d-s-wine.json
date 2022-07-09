@@ -7,30 +7,30 @@
     "exported_at": "2022-07-09T23:36:24+08:00",
     "name": "LiteLoaderBDS Wine",
     "author": "im@ivampiresp.com",
-    "description": "LiteLoader BDS \u53ef\u4ee5\u5728\u539f\u7248 BDS \u57fa\u7840\u4e0a\u589e\u52a0\u63d2\u4ef6\u7b49\u5185\u5bb9\u3002\r\n\r\nEggs \u4f5c\u8005: iVampireSP.com\r\nhttps:\/\/ivampiresp.com\r\n\r\n\u6700\u8fd1\u5728\u81ea\u7814\u8d22\u52a1\u7cfb\u7edf\uff0c\u5982\u679c\u60a8\u6709\u610f\u613f\uff0c\u8bf7\u8003\u8651\u52a0\u5165\u6211\u4eec\u3002\r\nQQ\u53f7: 2596048743\r\nQQ\u7fa4: 769779712\r\n\r\n\u975e\u5e38\u611f\u8c22\u3002",
+    "description": "LiteLoader BDS 可以在原版 BDS 基础上增加插件等内容。\r\n\r\nEggs 作者: iVampireSP.com\r\nhttps://ivampiresp.com\r\n\r\n最近在自研财务系统，如果您有意愿，请考虑加入我们。\r\nQQ号: 2596048743\r\nQQ群: 769779712\r\n\r\n非常感谢。",
     "features": null,
     "docker_images": {
-        "ccr.ccs.tencentyun.com\/pterodactyl\/yolks-parkervcp:wine_latest": "ccr.ccs.tencentyun.com\/pterodactyl\/yolks-parkervcp:wine_latest"
+        "ccr.ccs.tencentyun.com/pterodactyl/yolks-parkervcp:wine_latest": "ccr.ccs.tencentyun.com/pterodactyl/yolks-parkervcp:wine_latest"
     },
     "file_denylist": [],
-    "startup": ".\/lae-ll-launcher",
+    "startup": "./lae-ll-launcher",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"[INFO] Server started\",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs/latest.log\"\r\n}",
         "stop": "stop"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\n# LiteLoader Wine \u7531 iVampireSP.com\r\n\r\ncd \/mnt\/server\r\n\r\nrm -rf lae-ll-launcher\r\nrm -rf bedrock_server_mod.exe\r\n\r\nwget https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/BDS\/Windows\/bedrock-server-${BDS_VERSION}.zip -O bds.zip\r\nunzip -o bds.zip\r\n\r\nwget https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/BDS\/LiteLoader\/LiteLoader-${LITELOADER_VERSION}.zip -O LiteLoader.zip\r\nunzip -o LiteLoader.zip\r\n\r\nwget https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/BDS\/LiteLoader\/lae-ll-launcher -O lae-ll-launcher\r\nchmod +x lae-ll-launcher\r\n\r\n\r\n\r\nrm bds.zip\r\nrm LiteLoader.zip\r\nrm -rf bedrock_server_mod.exe\r\n\r\necho -e \"\u5b89\u88c5\u5b8c\u6210\u3002\"",
-            "container": "ccr.ccs.tencentyun.com\/pterodactyl\/installers:alpine",
+            "script": "#!/bin/bash\r\n\r\n# LiteLoader Wine 由 iVampireSP.com\r\n\r\ncd /mnt/server\r\n\r\nrm -rf lae-ll-launcher\r\nrm -rf bedrock_server_mod.exe\r\n\r\nwget https://io.ivampiresp.com/d/Software/MCServer/BDS/Windows/bedrock-server-${BDS_VERSION}.zip -O bds.zip\r\nunzip -o bds.zip\r\n\r\nwget https://io.ivampiresp.com/d/Software/MCServer/BDS/LiteLoader/LiteLoader-${LITELOADER_VERSION}.zip -O LiteLoader.zip\r\nunzip -o LiteLoader.zip\r\n\r\nwget https://io.ivampiresp.com/d/Software/MCServer/BDS/LiteLoader/lae-ll-launcher -O lae-ll-launcher\r\nchmod +x lae-ll-launcher\r\n\r\n\r\n\r\nrm bds.zip\r\nrm LiteLoader.zip\r\nrm -rf bedrock_server_mod.exe\r\n\r\necho -e \"安装完成。\"",
+            "container": "ccr.ccs.tencentyun.com/pterodactyl/installers:alpine",
             "entrypoint": "ash"
         }
     },
     "variables": [
         {
-            "name": "LiteLoader \u7248\u672c",
-            "description": "LiteLoader \u7248\u672c\r\n\u5fc5\u987b\u662f GitHub \u4e2d\u5b58\u5728\u7684 Release \u5426\u5219\u4f1a\u4e0b\u8f7d\u5931\u8d25",
+            "name": "LiteLoader 版本",
+            "description": "LiteLoader 版本\r\n必须是 GitHub 中存在的 Release 否则会下载失败",
             "env_variable": "LITELOADER_VERSION",
             "default_value": "2.3.1",
             "user_viewable": true,
@@ -39,8 +39,8 @@
             "field_type": "text"
         },
         {
-            "name": "BDS \u7248\u672c",
-            "description": "BDS \u7248\u672c\r\n\u540c\u6837\u5fc5\u987b\u662f\u5b58\u5728\u7684\u7248\u672c\u5426\u5219\u4f1a\u4e0b\u8f7d\u5931\u8d25",
+            "name": "BDS 版本",
+            "description": "BDS 版本\r\n同样必须是存在的版本否则会下载失败",
             "env_variable": "BDS_VERSION",
             "default_value": "1.19.2.02",
             "user_viewable": true,
@@ -49,8 +49,8 @@
             "field_type": "text"
         },
         {
-            "name": "Wine \u8c03\u8bd5\u7ea7\u522b",
-            "description": "\u8fd9\u4e2a\u4e00\u822c\u4e0d\u9700\u8981\u7ed9\u7528\u6237\u770b\r\n\u7528\u6765\u63a7\u5236Wine\u7684\u8c03\u8bd5\u4fe1\u606f\u8f93\u51fa",
+            "name": "Wine 调试级别",
+            "description": "这个一般不需要给用户看\r\n用来控制Wine的调试信息输出",
             "env_variable": "WINEDEBUG",
             "default_value": "-all",
             "user_viewable": false,
