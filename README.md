@@ -9,6 +9,6 @@ Minecraft 等服务端 Jar 文件从 [这里](https://io.ivampiresp.com/Software
 
 
 ## LiteLoader BDS Wine
-翼龙中国首发 LiteLoader BDS under Wine 完美解决方案。
+翼龙中国首发在 Pterodactyl 下 LiteLoader BDS Wine 的完美解决方案。
 
 ## 用的开心！
