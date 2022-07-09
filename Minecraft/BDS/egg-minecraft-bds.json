@@ -7,19 +7,19 @@
     "exported_at": "2021-08-24T23:27:50+08:00",
     "name": "minecraft-bds",
     "author": "xjdzch@126.com",
-    "description": "\u7528\u4e8e\u5fae\u8f6f\u5b98\u65b9\u7684BDS\u670d\u52a1\u5668",
+    "description": "用于微软官方的BDS服务器",
     "features": [
         "eula"
     ],
     "images": [
-        "ccr.ccs.tencentyun.com\/pterodactyl-cn\/other:bds"
+        "ccr.ccs.tencentyun.com/pterodactyl-cn/other:bds"
     ],
     "file_denylist": [],
-    "startup": "LD_LIBRARY_PATH=. .\/bedrock_server",
+    "startup": "LD_LIBRARY_PATH=. ./bedrock_server",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"[INFO] Server started\",\r\n    \"userInteraction\": [\r\n        \"Go to eula.txt for more info.\"\r\n    ]\r\n}",
-        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs\/latest.log\"\r\n}",
+        "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"logs/latest.log\"\r\n}",
         "stop": "stop"
     },
     "scripts": {

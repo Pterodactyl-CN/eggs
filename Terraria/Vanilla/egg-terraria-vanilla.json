@@ -10,27 +10,27 @@
     "description": "Dig, fight, explore, build! Nothing is impossible in this action-packed adventure game.",
     "features": null,
     "docker_images": {
-        "sgccr.ccs.tencentyun.com\/edgest\/pterodactyl:ubuntu": "sgccr.ccs.tencentyun.com\/edgest\/pterodactyl:ubuntu"
+        "sgccr.ccs.tencentyun.com/edgest/pterodactyl:ubuntu": "sgccr.ccs.tencentyun.com/edgest/pterodactyl:ubuntu"
     },
     "file_denylist": [],
-    "startup": ".\/TerrariaServer.bin.x86_64 -config serverconfig.txt",
+    "startup": "./TerrariaServer.bin.x86_64 -config serverconfig.txt",
     "config": {
-        "files": "{\r\n    \"serverconfig.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"worldpath\": \"\/home\/container\/saves\/Worlds\",\r\n            \"worldname\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"world\": \"\/home\/container\/saves\/Worlds\/{{server.build.env.WORLD_NAME}}.wld\",\r\n            \"difficulty\": \"{{server.build.env.WORLD_DIFFICULTY}}\",\r\n            \"autocreate\": \"{{server.build.env.WORLD_SIZE}}\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"motd\": \"{{server.build.env.SERVER_MOTD}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"serverconfig.txt\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"worldpath\": \"/home/container/saves/Worlds\",\r\n            \"worldname\": \"{{server.build.env.WORLD_NAME}}\",\r\n            \"world\": \"/home/container/saves/Worlds/{{server.build.env.WORLD_NAME}}.wld\",\r\n            \"difficulty\": \"{{server.build.env.WORLD_DIFFICULTY}}\",\r\n            \"autocreate\": \"{{server.build.env.WORLD_SIZE}}\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"maxplayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"motd\": \"{{server.build.env.SERVER_MOTD}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{}",
         "stop": "exit"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Server Files: \/mnt\/server\r\n\r\nDOWNLOAD_LINK=invalid\r\n\r\nmkdir -p \/mnt\/server\/\r\ncd \/mnt\/server\/\r\n\r\necho -e \"running 'wget ${DOWNLOAD_LINK} -O tr.zip'\" \r\nwget \"https:\/\/io.ivampiresp.com\/d\/Software\/Terraria\/PC\/terraria-server-${TERRARIA_VERSION}.zip\" -O tr.zip\r\n\r\necho -e \"Unpacking server files\"\r\nunzip tr.zip\r\n\r\necho -e \"\"\r\ncp -R ${TERRARIA_VERSION}\/Linux\/* .\/\r\nchmod +x TerrariaServer.bin.x86_64\r\n\r\necho -e \"Cleaning up extra files.\"\r\nrm -rf ${TERRARIA_VERSION}\r\n\r\necho -e \"Generating config file\"\r\ncat <<EOF > serverconfig.txt\r\nworldpath=\/home\/container\/saves\/Worlds\r\nworldname=default\r\nworld=\/home\/container\/saves\/Worlds\/default.wld\r\ndifficulty=3\r\nautocreate=1\r\nport=7777\r\nmaxplayers=8\r\nEOF\r\n\r\nmkdir -p \/mnt\/server\/saves\/Worlds\r\n\r\necho -e \"Install complete\"",
-            "container": "ccr.ccs.tencentyun.com\/pterodactyl\/installers:alpine",
+            "script": "#!/bin/bash\r\n# Server Files: /mnt/server\r\n\r\nDOWNLOAD_LINK=invalid\r\n\r\nmkdir -p /mnt/server/\r\ncd /mnt/server/\r\n\r\necho -e \"running 'wget ${DOWNLOAD_LINK} -O tr.zip'\" \r\nwget \"https://io.ivampiresp.com/d/Software/Terraria/PC/terraria-server-${TERRARIA_VERSION}.zip\" -O tr.zip\r\n\r\necho -e \"Unpacking server files\"\r\nunzip tr.zip\r\n\r\necho -e \"\"\r\ncp -R ${TERRARIA_VERSION}/Linux/* ./\r\nchmod +x TerrariaServer.bin.x86_64\r\n\r\necho -e \"Cleaning up extra files.\"\r\nrm -rf ${TERRARIA_VERSION}\r\n\r\necho -e \"Generating config file\"\r\ncat <<EOF > serverconfig.txt\r\nworldpath=/home/container/saves/Worlds\r\nworldname=default\r\nworld=/home/container/saves/Worlds/default.wld\r\ndifficulty=3\r\nautocreate=1\r\nport=7777\r\nmaxplayers=8\r\nEOF\r\n\r\nmkdir -p /mnt/server/saves/Worlds\r\n\r\necho -e \"Install complete\"",
+            "container": "ccr.ccs.tencentyun.com/pterodactyl/installers:alpine",
             "entrypoint": "ash"
         }
     },
     "variables": [
         {
-            "name": "Terraria \u7248\u672c",
-            "description": "\u5c06\u8981\u4f7f\u7528\u7684\u6cf0\u62c9\u745e\u4e9a\u7248\u672c\uff0c\u7559\u7a7a\u4ee5\u4f7f\u7528\u6700\u65b0\u7248\u672c\u3002\r\n\r\n\u4f60\u53ef\u4ee5\u4f7f\u7528\u5b8c\u6574\u7684\u7248\u672c\u53f7\uff0c\u4f8b\u5982 1.3.5.3 \u6216\u8005 1353\r\n\u4ece\u8fd9\u91cc\u83b7\u53d6\u7248\u672c\u53f7: https:\/\/io.ivampiresp.com\/Software\/Terraria\/PC",
+            "name": "Terraria 版本",
+            "description": "将要使用的泰拉瑞亚版本，留空以使用最新版本。\r\n\r\n你可以使用完整的版本号，例如 1.3.5.3 或者 1353\r\n从这里获取版本号: https://io.ivampiresp.com/Software/Terraria/PC",
             "env_variable": "TERRARIA_VERSION",
             "default_value": "1436",
             "user_viewable": true,
@@ -39,8 +39,8 @@
             "field_type": "text"
         },
         {
-            "name": "\u4e16\u754c\u540d\u79f0",
-            "description": "\u4e16\u754c\u6587\u4ef6\u7684\u540d\u79f0",
+            "name": "世界名称",
+            "description": "世界文件的名称",
             "env_variable": "WORLD_NAME",
             "default_value": "world",
             "user_viewable": true,
@@ -49,8 +49,8 @@
             "field_type": "text"
         },
         {
-            "name": "\u6700\u5927\u73a9\u5bb6\u6570\u91cf",
-            "description": "\u670d\u52a1\u5668\u5c06\u627f\u8f7d\u7684\u6700\u5927\u73a9\u5bb6\u6570\u91cf",
+            "name": "最大玩家数量",
+            "description": "服务器将承载的最大玩家数量",
             "env_variable": "MAX_PLAYERS",
             "default_value": "8",
             "user_viewable": true,
@@ -59,8 +59,8 @@
             "field_type": "text"
         },
         {
-            "name": "\u4e16\u754c\u5927\u5c0f",
-            "description": "\u5b9a\u4e49\u4e16\u754c\u5927\u5c0f\uff0c\u4e00\u5171\u67093\u4e2a\u5927\u5c0f\u3002\r\n1 (small), 2 (medium), 3 (large).\r\n\u5206\u522b\u662f\uff0c\u5c0f\uff0c\u4e2d\uff0c\u5927\r\n\u8f93\u5165\u65f6\u8bf7\u8f93\u5165\u6570\u5b57\uff0c\u6bd4\u5982 1\uff0c\u4ee3\u8868\u5c0f",
+            "name": "世界大小",
+            "description": "定义世界大小，一共有3个大小。\r\n1 (small), 2 (medium), 3 (large).\r\n分别是，小，中，大\r\n输入时请输入数字，比如 1，代表小",
             "env_variable": "WORLD_SIZE",
             "default_value": "1",
             "user_viewable": true,
@@ -69,8 +69,8 @@
             "field_type": "text"
         },
         {
-            "name": "\u96be\u5ea6",
-            "description": "\u4e16\u754c\u96be\u5ea6\uff0c0 \u4e3a \u6b63\u5e38\uff0c1 \u4e3a\u4e13\u5bb6\uff0c 2 \u4e3a\u5927\u5e08\uff0c3\u4e3a\u65c5\u884c",
+            "name": "难度",
+            "description": "世界难度，0 为 正常，1 为专家， 2 为大师，3为旅行",
             "env_variable": "WORLD_DIFFICULTY",
             "default_value": "3",
             "user_viewable": true,
@@ -80,7 +80,7 @@
         },
         {
             "name": "MOTD",
-            "description": "\u670d\u52a1\u5668\u7684 MOTD",
+            "description": "服务器的 MOTD",
             "env_variable": "SERVER_MOTD",
             "default_value": "Welcome!",
             "user_viewable": true,

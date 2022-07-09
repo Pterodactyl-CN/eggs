@@ -7,13 +7,13 @@
     "exported_at": "2022-07-03T17:36:33+08:00",
     "name": "CatServer",
     "author": "im@ivampiresp.com",
-    "description": "CatServer \u662f\u4e00\u4e2a\u9ad8\u7248\u672c\u5e76\u4e14\u540c\u65f6\u652f\u6301\u63d2\u4ef6\u548c Mod \u7684\u670d\u52a1\u7aef\u3002",
+    "description": "CatServer 是一个高版本并且同时支持插件和 Mod 的服务端。",
     "features": null,
     "docker_images": {
-        "Java 8": "ccr.ccs.tencentyun.com\/pterodactyl\/yolks:java_8",
-        "Java 11": "ccr.ccs.tencentyun.com\/pterodactyl\/yolks:java_11",
-        "Java 16": "ccr.ccs.tencentyun.com\/pterodactyl\/yolks:java_16",
-        "Java 17": "ccr.ccs.tencentyun.com\/pterodactyl\/yolks:java_17"
+        "Java 8": "ccr.ccs.tencentyun.com/pterodactyl/yolks:java_8",
+        "Java 11": "ccr.ccs.tencentyun.com/pterodactyl/yolks:java_11",
+        "Java 16": "ccr.ccs.tencentyun.com/pterodactyl/yolks:java_16",
+        "Java 17": "ccr.ccs.tencentyun.com/pterodactyl/yolks:java_17"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
@@ -25,30 +25,30 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# CatServer Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nwget \"https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/Forge&Bukkit\/CatServer\/CatServer-${VERSION}.jar\" -O ${SERVER_JARFILE} \r\n\r\necho -e \"\u670d\u52a1\u5668\u5b89\u88c5\u5b8c\u6210\u3002\"",
-            "container": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/installers:alpine",
+            "script": "#!/bin/ash\r\n# CatServer Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\ncd /mnt/server\r\n\r\nwget \"https://io.ivampiresp.com/d/Software/MCServer/Forge&Bukkit/CatServer/CatServer-${VERSION}.jar\" -O ${SERVER_JARFILE} \r\n\r\necho -e \"服务器安装完成。\"",
+            "container": "ccr.ccs.tencentyun.com/pterodactyl-cdn/installers:alpine",
             "entrypoint": "ash"
         }
     },
     "variables": [
         {
-            "name": "CatServer \u7248\u672c",
-            "description": "\u8981\u4e0b\u8f7d\u5e76\u4f7f\u7528\u7684\u7248\u672c\u3002\r\n\u7248\u672c\u8bf7\u5728\u8fd9\u91cc\u67e5\u770b:https:\/\/io.ivampiresp.com\/Software\/MCServer\/Forge&Bukkit\/CatServer",
+            "name": "CatServer 版本",
+            "description": "要下载并使用的版本。\r\n版本请在这里查看:https://io.ivampiresp.com/Software/MCServer/Forge&Bukkit/CatServer",
             "env_variable": "VERSION",
             "default_value": "1.16.5-76952803",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([a-zA-Z0-9.\\-_]+)$\/",
+            "rules": "required|regex:/^([a-zA-Z0-9.\\-_]+)$/",
             "field_type": "text"
         },
         {
-            "name": "\u670d\u52a1\u5668 Jar \u6587\u4ef6",
-            "description": "\u4f60\u60f3\u81ea\u5b9a\u4e49\u7684\u6587\u4ef6\u540d\u79f0\u3002",
+            "name": "服务器 Jar 文件",
+            "description": "你想自定义的文件名称。",
             "env_variable": "SERVER_JARFILE",
             "default_value": "server.jar",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "rules": "required|regex:/^([\\w\\d._-]+)(\\.jar)$/",
             "field_type": "text"
         }
     ]

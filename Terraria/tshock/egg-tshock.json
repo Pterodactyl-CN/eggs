@@ -7,23 +7,23 @@
     "exported_at": "2022-07-04T00:56:17+08:00",
     "name": "tshock",
     "author": "im@ivampiresp.com",
-    "description": "The t-shock modded terraria server.\r\n\r\nhttps:\/\/tshock.co\/",
+    "description": "The t-shock modded terraria server.\r\n\r\nhttps://tshock.co/",
     "features": null,
     "docker_images": {
-        "ccr.ccs.tencentyun.com\/pterodactyl\/yolks-parkervcp:mono_latest": "ccr.ccs.tencentyun.com\/pterodactyl\/yolks-parkervcp:mono_latest"
+        "ccr.ccs.tencentyun.com/pterodactyl/yolks-parkervcp:mono_latest": "ccr.ccs.tencentyun.com/pterodactyl/yolks-parkervcp:mono_latest"
     },
     "file_denylist": [],
     "startup": "mono TerrariaServer.exe -ip 0.0.0.0 -port {{SERVER_PORT}} -maxplayers {{MAX_PLAYERS}} -world {{WORLD_NAME}}.wld -autocreate {{WORLD_SIZE}}",
     "config": {
-        "files": "{\r\n    \"tshock\/config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {}\r\n    }\r\n}",
+        "files": "{\r\n    \"tshock/config.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {}\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Type 'help' for a list of commands\",\r\n    \"userInteraction\": []\r\n}",
         "logs": "{\r\n    \"custom\": false,\r\n    \"location\": \"ServerLog.txt\"\r\n}",
         "stop": "exit"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Vanilla tModloader Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\n## mkdir and cd to \/mnt\/server\/\r\nmkdir -p \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nDOWNLOAD_LINK=\"https:\/\/io.ivampiresp.com\/d\/Software\/Terraria\/TShock\/TShock${TSHOCK_VERSION}_Terraria1.4.3.6.zip\"\r\n## download release\r\necho -e \"running: wget $DOWNLOAD_LINK\"\r\nwget $DOWNLOAD_LINK -O tr.zip\r\n\r\nunzip tr.zip\r\n\r\necho -e \"install complete\"",
-            "container": "ccr.ccs.tencentyun.com\/pterodactyl\/installers:alpine",
+            "script": "#!/bin/bash\r\n# Vanilla tModloader Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\n## mkdir and cd to /mnt/server/\r\nmkdir -p /mnt/server\r\n\r\ncd /mnt/server\r\n\r\nDOWNLOAD_LINK=\"https://io.ivampiresp.com/d/Software/Terraria/TShock/TShock${TSHOCK_VERSION}_Terraria1.4.3.6.zip\"\r\n## download release\r\necho -e \"running: wget $DOWNLOAD_LINK\"\r\nwget $DOWNLOAD_LINK -O tr.zip\r\n\r\nunzip tr.zip\r\n\r\necho -e \"install complete\"",
+            "container": "ccr.ccs.tencentyun.com/pterodactyl/installers:alpine",
             "entrypoint": "ash"
         }
     },
@@ -59,8 +59,8 @@
             "field_type": "text"
         },
         {
-            "name": "Tshock \u7248\u672c",
-            "description": "\u5c06\u8981\u5b89\u88c5\u7684 Tshock \u7248\u672c",
+            "name": "Tshock 版本",
+            "description": "将要安装的 Tshock 版本",
             "env_variable": "TSHOCK_VERSION",
             "default_value": "4.5.16",
             "user_viewable": true,

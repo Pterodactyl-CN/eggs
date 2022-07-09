@@ -5,17 +5,17 @@
         "update_url": null
     },
     "exported_at": "2022-07-02T22:46:36+08:00",
-    "name": "\u57fa\u5ca9\u4e13\u7528\u670d\u52a1\u7aef",
+    "name": "基岩专用服务端",
     "author": "im@ivampiresp.com",
-    "description": "\u57fa\u5ca9\u7248\u7684\u4e13\u7528\u670d\u52a1\u7aef\uff0c\u5bf9 Linux \u4f18\u5316\u4e0d\u4f73\u3002",
+    "description": "基岩版的专用服务端，对 Linux 优化不佳。",
     "features": [
         "pid_limit"
     ],
     "docker_images": {
-        "sgccr.ccs.tencentyun.com\/edgest\/pterodactyl:debian": "sgccr.ccs.tencentyun.com\/edgest\/pterodactyl:debian"
+        "sgccr.ccs.tencentyun.com/edgest/pterodactyl:debian": "sgccr.ccs.tencentyun.com/edgest/pterodactyl:debian"
     },
     "file_denylist": [],
-    "startup": ".\/bedrock_server",
+    "startup": "./bedrock_server",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"server-name\": \"{{server.build.env.SERVERNAME}}\",\r\n            \"gamemode\": \"{{server.build.env.GAMEMODE}}\",\r\n            \"difficulty\": \"{{server.build.env.DIFFICULTY}}\",\r\n            \"allow-cheats\": \"{{server.build.env.CHEATS}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server started\"\r\n}",
@@ -24,15 +24,15 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n\r\n#apt update\r\n#apt install -y zip unzip wget curl\r\n\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n    mkdir \/mnt\/server\/\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\necho -e \"backing up config files\"\r\nrm *.bak versions.html.gz\r\ncp server.properties server.properties.bak\r\ncp permissions.json permissions.json.bak\r\ncp whitelist.json whitelist.json.bak\r\n\r\nwget -O bds.zip https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/BDS\/Linux\/bedrock-server-1.19.2.02.zip\r\necho -e \"Unpacking server files\"\r\nunzip -o bds.zip\r\n\r\necho -e \"Cleaning up after installing\"\r\nrm bds.zip\r\n\r\necho -e \"restoring backup config files - on first install there will be file not found errors which you can ignore.\"\r\ncp -rf server.properties.bak server.properties\r\ncp -rf permissions.json.bak permissions.json\r\ncp -rf whitelist.json.bak whitelist.json\r\n\r\nchmod +x bedrock_server\r\n\r\necho -e \"Install Completed\"\r\nexit",
-            "container": "ccr.ccs.tencentyun.com\/pterodactyl\/installers:alpine",
+            "script": "#!/bin/ash\r\n\r\n#apt update\r\n#apt install -y zip unzip wget curl\r\n\r\nif [ ! -d /mnt/server/ ]; then\r\n    mkdir /mnt/server/\r\nfi\r\n\r\ncd /mnt/server\r\n\r\necho -e \"backing up config files\"\r\nrm *.bak versions.html.gz\r\ncp server.properties server.properties.bak\r\ncp permissions.json permissions.json.bak\r\ncp whitelist.json whitelist.json.bak\r\n\r\nwget -O bds.zip https://io.ivampiresp.com/d/Software/MCServer/BDS/Linux/bedrock-server-1.19.2.02.zip\r\necho -e \"Unpacking server files\"\r\nunzip -o bds.zip\r\n\r\necho -e \"Cleaning up after installing\"\r\nrm bds.zip\r\n\r\necho -e \"restoring backup config files - on first install there will be file not found errors which you can ignore.\"\r\ncp -rf server.properties.bak server.properties\r\ncp -rf permissions.json.bak permissions.json\r\ncp -rf whitelist.json.bak whitelist.json\r\n\r\nchmod +x bedrock_server\r\n\r\necho -e \"Install Completed\"\r\nexit",
+            "container": "ccr.ccs.tencentyun.com/pterodactyl/installers:alpine",
             "entrypoint": "ash"
         }
     },
     "variables": [
         {
-            "name": "\u670d\u52a1\u5668\u540d\u79f0",
-            "description": "\u5c06\u663e\u793a\u5728\u5ba2\u6237\u7aef MOTD",
+            "name": "服务器名称",
+            "description": "将显示在客户端 MOTD",
             "env_variable": "SERVERNAME",
             "default_value": "Bedrock Dedicated Server",
             "user_viewable": true,
@@ -41,8 +41,8 @@
             "field_type": "text"
         },
         {
-            "name": "\u6e38\u620f\u6a21\u5f0f",
-            "description": "\u503c: \"survival\", \"creative\", \"adventure\"\r\n\u5206\u522b\u4e3a: \u751f\u5b58\uff0c\u521b\u9020\u548c\u5192\u9669",
+            "name": "游戏模式",
+            "description": "值: \"survival\", \"creative\", \"adventure\"\r\n分别为: 生存，创造和冒险",
             "env_variable": "GAMEMODE",
             "default_value": "survival",
             "user_viewable": true,
@@ -51,8 +51,8 @@
             "field_type": "text"
         },
         {
-            "name": "\u96be\u5ea6",
-            "description": "\u53ef\u586b\u5199\u7684\u503c: \"peaceful\", \"easy\", \"normal\", \"hard\"\r\n\r\n\u5206\u522b\u4e3a: \u548c\u5e73\uff0c\u7b80\u5355\uff0c\u6b63\u5e38\u548c\u56f0\u96be",
+            "name": "难度",
+            "description": "可填写的值: \"peaceful\", \"easy\", \"normal\", \"hard\"\r\n\r\n分别为: 和平，简单，正常和困难",
             "env_variable": "DIFFICULTY",
             "default_value": "easy",
             "user_viewable": true,
@@ -61,8 +61,8 @@
             "field_type": "text"
         },
         {
-            "name": "\u5141\u8bb8\u4f5c\u5f0a",
-            "description": "\u5982\u679c\u4e3a true\uff0c\u5219\u4ee3\u8868\u53ef\u4ee5\u4f7f\u7528\u6307\u4ee4\r\n\r\n\u53ef\u586b\u5199\u7684\u503c: \"true\" \u548c \"false\"",
+            "name": "允许作弊",
+            "description": "如果为 true，则代表可以使用指令\r\n\r\n可填写的值: \"true\" 和 \"false\"",
             "env_variable": "CHEATS",
             "default_value": "false",
             "user_viewable": true,

@@ -7,10 +7,10 @@
     "exported_at": "2022-07-03T17:42:35+08:00",
     "name": "Mohist",
     "author": "im@ivampiresp.com",
-    "description": "Mohist \u662f\u4e00\u4e2a\u652f\u6301\u9ad8\u7248\u672c\u7684 Minecraft \u670d\u52a1\u7aef\uff0c\u53ef\u4ee5\u7528\u63d2\u4ef6 \u548c Mod\u3002",
+    "description": "Mohist 是一个支持高版本的 Minecraft 服务端，可以用插件 和 Mod。",
     "features": null,
     "docker_images": {
-        "Java 11": "ccr.ccs.tencentyun.com\/pterodactyl\/yolks:java_11"
+        "Java 11": "ccr.ccs.tencentyun.com/pterodactyl/yolks:java_11"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
@@ -22,30 +22,30 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Mohist Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nwget \"https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/Forge&Bukkit\/Mohist\/mohist-${VERSION}-server.jar\" -O ${SERVER_JARFILE}\r\n\r\necho -e \"\u670d\u52a1\u5668\u5b89\u88c5\u5b8c\u6210\u3002\"",
-            "container": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/installers:alpine",
+            "script": "#!/bin/ash\r\n# Mohist Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\ncd /mnt/server\r\n\r\nwget \"https://io.ivampiresp.com/d/Software/MCServer/Forge&Bukkit/Mohist/mohist-${VERSION}-server.jar\" -O ${SERVER_JARFILE}\r\n\r\necho -e \"服务器安装完成。\"",
+            "container": "ccr.ccs.tencentyun.com/pterodactyl-cdn/installers:alpine",
             "entrypoint": "ash"
         }
     },
     "variables": [
         {
-            "name": "Mohist \u7248\u672c",
-            "description": "\u8981\u5b89\u88c5\u7684 Mohist \u7248\u672c\u3002\u53ef\u4ee5\u4ece https:\/\/io.ivampiresp.com\/Software\/MCServer\/Forge&Bukkit\/Mohist \u83b7\u53d6",
+            "name": "Mohist 版本",
+            "description": "要安装的 Mohist 版本。可以从 https://io.ivampiresp.com/Software/MCServer/Forge&Bukkit/Mohist 获取",
             "env_variable": "VERSION",
             "default_value": "1.16.5-1039",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([a-zA-Z0-9.\\-_]+)$\/",
+            "rules": "required|regex:/^([a-zA-Z0-9.\\-_]+)$/",
             "field_type": "text"
         },
         {
-            "name": "\u670d\u52a1\u5668 Jar \u6587\u4ef6",
-            "description": "\u4f60\u60f3\u81ea\u5b9a\u4e49\u7684\u6587\u4ef6\u540d\u79f0\u3002",
+            "name": "服务器 Jar 文件",
+            "description": "你想自定义的文件名称。",
             "env_variable": "SERVER_JARFILE",
             "default_value": "server.jar",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "rules": "required|regex:/^([\\w\\d._-]+)(\\.jar)$/",
             "field_type": "text"
         }
     ]

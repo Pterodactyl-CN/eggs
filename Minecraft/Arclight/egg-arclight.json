@@ -7,12 +7,12 @@
     "exported_at": "2022-07-03T17:42:34+08:00",
     "name": "Arclight",
     "author": "im@ivampiresp.com",
-    "description": "Arclight \u26a1 \u2014\u2014 \u9ad8\u7248\u672c Forge+Bukkit \u670d\u52a1\u7aef\u5b9e\u73b0",
+    "description": "Arclight ⚡ —— 高版本 Forge+Bukkit 服务端实现",
     "features": null,
     "docker_images": {
-        "Java 11": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_11",
-        "Java 16": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_16",
-        "Java 17": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/yolks:java_17"
+        "Java 11": "ccr.ccs.tencentyun.com/pterodactyl-cdn/yolks:java_11",
+        "Java 16": "ccr.ccs.tencentyun.com/pterodactyl-cdn/yolks:java_16",
+        "Java 17": "ccr.ccs.tencentyun.com/pterodactyl-cdn/yolks:java_17"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
@@ -24,30 +24,30 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Arclight Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\nwget \"https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/Forge&Bukkit\/Arclight\/arclight-forge-${VERSION}.jar\" -O ${SERVER_JARFILE}\r\n\r\necho -e \"\u670d\u52a1\u5668\u5b89\u88c5\u5b8c\u6210\u3002\"",
-            "container": "ccr.ccs.tencentyun.com\/pterodactyl\/installers:alpine",
+            "script": "#!/bin/ash\r\n# Arclight Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\ncd /mnt/server\r\n\r\nwget \"https://io.ivampiresp.com/d/Software/MCServer/Forge&Bukkit/Arclight/arclight-forge-${VERSION}.jar\" -O ${SERVER_JARFILE}\r\n\r\necho -e \"服务器安装完成。\"",
+            "container": "ccr.ccs.tencentyun.com/pterodactyl/installers:alpine",
             "entrypoint": "ash"
         }
     },
     "variables": [
         {
-            "name": "Arclight \u7248\u672c",
-            "description": "\u8981\u5b89\u88c5\u7684 Arclight \u7248\u672c\r\n\u7248\u672c\u5728\u8fd9\u91cc\u627e: https:\/\/io.ivampiresp.com\/Software\/MCServer\/Forge&Bukkit\/Arclight",
+            "name": "Arclight 版本",
+            "description": "要安装的 Arclight 版本\r\n版本在这里找: https://io.ivampiresp.com/Software/MCServer/Forge&Bukkit/Arclight",
             "env_variable": "VERSION",
             "default_value": "1.18.2-1.0.5",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([a-zA-Z0-9.\\-_]+)$\/",
+            "rules": "required|regex:/^([a-zA-Z0-9.\\-_]+)$/",
             "field_type": "text"
         },
         {
-            "name": "\u670d\u52a1\u5668 Jar \u6587\u4ef6",
-            "description": "\u4f60\u60f3\u81ea\u5b9a\u4e49\u7684\u6587\u4ef6\u540d\u79f0\u3002",
+            "name": "服务器 Jar 文件",
+            "description": "你想自定义的文件名称。",
             "env_variable": "SERVER_JARFILE",
             "default_value": "server.jar",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "rules": "required|regex:/^([\\w\\d._-]+)(\\.jar)$/",
             "field_type": "text"
         }
     ]
