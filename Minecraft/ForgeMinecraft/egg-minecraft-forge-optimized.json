@@ -7,15 +7,15 @@
     "exported_at": "2023-04-20T15:40:42+08:00",
     "name": "Minecraft Forge Optimized",
     "author": "im@ivampiresp.com",
-    "description": "\u4f18\u5316\u8fc7\u7684 Forge \u4e0b\u8f7d",
+    "description": "优化过的 Forge 下载",
     "features": null,
     "docker_images": {
-        "Java 8": "ccr.ccs.tencentyun.com\/pterodactyl\/yolks:java_8",
-        "Java 11": "ccr.ccs.tencentyun.com\/pterodactyl\/yolks:java_11",
-        "Java 16": "ccr.ccs.tencentyun.com\/pterodactyl\/yolks:java_16",
-        "Java 17": "ccr.ccs.tencentyun.com\/pterodactyl\/yolks:java_17",
-        "Java 18": "ccr.ccs.tencentyun.com\/pterodactyl\/yolks:java_18",
-        "Java 19": "ccr.ccs.tencentyun.com\/pterodactyl\/yolks-parkervcp:java_19"
+        "Java 8": "ccr.ccs.tencentyun.com/pterodactyl/yolks:java_8",
+        "Java 11": "ccr.ccs.tencentyun.com/pterodactyl/yolks:java_11",
+        "Java 16": "ccr.ccs.tencentyun.com/pterodactyl/yolks:java_16",
+        "Java 17": "ccr.ccs.tencentyun.com/pterodactyl/yolks:java_17",
+        "Java 18": "ccr.ccs.tencentyun.com/pterodactyl/yolks:java_18",
+        "Java 19": "ccr.ccs.tencentyun.com/pterodactyl/yolks-parkervcp:java_19"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true $( [[  ! -f unix_args.txt ]] && printf %s \"-jar {{SERVER_JARFILE}}\" || printf %s \"@unix_args.txt\" )",
@@ -27,15 +27,15 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# Forge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\nif [[ ! -d \/mnt\/server ]]; then\r\n  mkdir \/mnt\/server\r\nfi\r\n\r\ncd \/mnt\/server\r\n\r\nwget \"https:\/\/io.ivampiresp.com\/d\/Software\/MCServer\/Auto\/forge\/compressed\/${MC_VERSION}.tar.gz\" -O compressed.tar.gz\r\n\r\ntar zxvf compressed.tar.gz\r\n\r\necho \"\u5b89\u88c5\u5b8c\u6210\"",
-            "container": "ccr.ccs.tencentyun.com\/pterodactyl-cdn\/installers:alpine",
+            "script": "#!/bin/bash\r\n# Forge Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\nif [[ ! -d /mnt/server ]]; then\r\n  mkdir /mnt/server\r\nfi\r\n\r\ncd /mnt/server\r\n\r\nwget \"https://io.ivampiresp.com/d/Software/MCServer/Auto/forge/compressed/${MC_VERSION}.tar.gz\" -O compressed.tar.gz\r\n\r\ntar zxvf compressed.tar.gz\r\n\r\necho \"安装完成\"",
+            "container": "ccr.ccs.tencentyun.com/pterodactyl-cdn/installers:alpine",
             "entrypoint": "ash"
         }
     },
     "variables": [
         {
-            "name": "Minecraft \u7248\u672c",
-            "description": "\u8981\u5b89\u88c5\u7684 Minecraft \u7248\u672c\u3002",
+            "name": "Minecraft 版本",
+            "description": "要安装的 Minecraft 版本。",
             "env_variable": "MC_VERSION",
             "default_value": "1.16.5",
             "user_viewable": true,
